@@ -51,7 +51,7 @@ static void OpenFile()
      WriteLine(message);
 }
 
-static int Factorial(int number)
+static long Factorial(long number)
 {
     if (number < 1)
     {
@@ -63,7 +63,10 @@ static int Factorial(int number)
     }
     else
     {
-        return number * Factorial(number - 1);
+        checked
+        {
+            return number * Factorial(number - 1);
+        }
     }
 }
 
@@ -71,7 +74,15 @@ static void RunFactorial(long number)
 {
     for (int i = 1; i <= number; i++)
     {
-        WriteLine($"{i}! = {Factorial(i):N0}");
+        try
+        {
+            WriteLine($"{i}! = {Factorial(i):N0}");
+        }
+        catch(System.StackOverflowException)
+        {
+            WriteLine($"{i}! is too big for a 64-bit integer.");
+        }
+        
     }
 }
 
