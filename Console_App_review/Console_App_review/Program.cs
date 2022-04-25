@@ -133,6 +133,14 @@ static void RunFibImperative()
     }
 }
 
+static int FibFunctional(int term) =>
+ term switch
+ {
+     1 => 0,
+     2 => 1,
+     _ => FibFunctional(term - 1) + FibFunctional(term - 2)
+ };
+
 //RunFactorial(10);
 RunFibImperative();
 
