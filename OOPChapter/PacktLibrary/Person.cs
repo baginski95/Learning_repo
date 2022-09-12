@@ -37,6 +37,29 @@ namespace Packt.Shared
         {
             return $"{Name} was born on {HomePlanet}.";
         }
+
+        public (string, int) GetFruit()
+        {
+            return ("Apples", 5);
+        }
+
+        public (string Name, int Number) GetNamedFruit()
+        {
+            return (Name: "Apples", Number: 5);
+        }
+
+        public void Deconstruct(out string name, out DateTime dob)
+        {
+            name = Name;
+            dob = DateOfBirth;
+        }
+        public void Deconstruct(out string name,
+         out DateTime dob, out WondersOfTheAncientWorld fav)
+        {
+            name = Name;
+            dob = DateOfBirth;
+            fav = FavoriteAncientWonder;
+        }
     }
   
 }
