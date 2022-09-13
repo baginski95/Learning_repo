@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Packt.Shared
 {
-    public class Person : object
+    public partial class Person : object
     {
         public const string Species = "Homo Sapien";
         public readonly string HomePlanet = "Earth";
@@ -53,12 +53,45 @@ namespace Packt.Shared
             name = Name;
             dob = DateOfBirth;
         }
+
         public void Deconstruct(out string name,
          out DateTime dob, out WondersOfTheAncientWorld fav)
         {
             name = Name;
             dob = DateOfBirth;
             fav = FavoriteAncientWonder;
+        }
+
+        public string SayHello()
+        {
+            return $"{Name} says 'Hello!'";
+        }
+
+        public string SayHello(string name)
+        {
+            return $"{Name} says 'Hello {name}!'";
+        }
+
+        public string OptionalParameters(
+                     string command = "Run!",
+                     double number = 0.0,
+                     bool active = true)
+        {
+            return string.Format(
+            format: "command is {0}, number is {1}, active is {2}",
+            arg0: command,
+            arg1: number,
+            arg2: active);
+        }
+
+        public void PassingParameters(int x, ref int y, out int z)
+        {
+            // out parameters cannot have a default
+            // AND must be initialized inside the method
+            z = 99;
+            x++;
+            y++;
+            z++;
         }
     }
   
