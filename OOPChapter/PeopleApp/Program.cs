@@ -114,7 +114,7 @@ WriteLine($"Before: d = {d}, e = {e}, f doesn't exist yet!");
 bob.PassingParameters(d, ref e, out int f);
 WriteLine($"After: d = {d}, e = {e}, f = {f}");
 
-Person sam = new()
+Person sam = new Person()
 {
     Name = "Sam",
     DateOfBirth = new(1972, 1, 27)
@@ -128,3 +128,33 @@ sam.FavoriteIceCream = "Chocolate Fudge";
 WriteLine($"Sam's favorite ice-cream flavor is {sam.FavoriteIceCream}.");
 sam.FavoritePrimaryColor = "Red";
 WriteLine($"Sam's favorite primary color is {sam.FavoritePrimaryColor}.");
+
+sam.Children.Add(new Person() { Name = "Charlie" });
+sam.Children.Add(new() { Name = "Ella" });
+WriteLine($"Sam's first child is {sam.Children[0].Name}");
+WriteLine($"Sam's second child is {sam.Children[1].Name}");
+WriteLine($"Sam's first child is {sam[0].Name}");
+WriteLine($"Sam's second child is {sam[1].Name}");
+
+object[] passengers = {
+ new FirstClassPassenger { AirMiles = 1_419 },
+ new FirstClassPassenger { AirMiles = 16_562 },
+ new BusinessClassPassenger(),
+ new CoachClassPassenger { CarryOnKG = 25.7 },
+ new CoachClassPassenger { CarryOnKG = 0 },
+};
+
+foreach (object passenger in passengers)
+{
+    decimal flightCost = passenger switch
+    {
+        FirstClassPassenger p when p.AirMiles > 35000 => 1500M,
+        FirstClassPassenger p when p.AirMiles > 15000 => 1750M,
+        FirstClassPassenger _ => 2000M,
+        BusinessClassPassenger _ => 1000M,
+        CoachClassPassenger p when p.CarryOnKG < 10.0 => 500M,
+        CoachClassPassenger _ => 650M,
+        _ => 800M
+    };
+    WriteLine($"Flight costs {flightCost:C} for {passenger}");
+}

@@ -37,10 +37,22 @@ namespace Packt.Shared
                         favoritePrimaryColor = value;
                         break;
                     default:
-                        throw new System.ArgumentException(
+                        throw new ArgumentException(
                         $"{value} is not a primary color. " +
                         "Choose from: red, green, blue.");
                 }
+            }
+        }
+
+        public Person this[int index]
+        {
+            get
+            {
+                return Children[index]; // pass on to the List<T> indexer
+            }
+            set
+            {
+                Children[index] = value;
             }
         }
     }
