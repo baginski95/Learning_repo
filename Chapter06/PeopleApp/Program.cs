@@ -57,3 +57,28 @@ lookupIntString.Add(key: 1, value: "Alpha");
 lookupIntString.Add(key: 2, value: "Beta");
 lookupIntString.Add(key: 3, value: "Gamma");
 lookupIntString.Add(key: 4, value: "Delta");
+
+key = 3;
+WriteLine(format: "Key {0} has value: {1}",
+ arg0: key,
+ arg1: lookupIntString[key]);
+
+Person[] people =
+{
+ new() { Name = "Simon" },
+ new() { Name = "Jenny" },
+ new() { Name = "Adam" },
+ new() { Name = "Richard" }
+};
+WriteLine("Initial list of people:");
+foreach (Person p in people)
+{
+    WriteLine($" {p.Name}");
+}
+WriteLine("Use Person's IComparable implementation to sort:");
+Array.Sort(people);
+
+foreach (Person p in people)
+{
+    WriteLine($" {p.Name}");
+}
