@@ -87,4 +87,5 @@ public class Person : object, IComparable<Person>
     {
         return $"{Name} is a {base.ToString()}";
     }
+
 }
