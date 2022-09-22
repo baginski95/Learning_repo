@@ -37,8 +37,26 @@ WriteLine(aliceInPerson.ToString());
 //    // safely do something with explicitAlice
 //}
 
-if (aliceInPerson is Employee explicitAlice) //declaration Pattern
+//if (aliceInPerson is Employee explicitAlice) //declaration Pattern
+//{
+//    WriteLine($"{nameof(aliceInPerson)} IS an Employee");
+//    // safely do something with explicitAlice
+//}
+
+Employee? aliceAsEmployee = aliceInPerson as Employee; // could be null
+if (aliceAsEmployee is not null)
 {
-    WriteLine($"{nameof(aliceInPerson)} IS an Employee");
-    // safely do something with explicitAlice
+    WriteLine($"{nameof(aliceInPerson)} AS an Employee");
+    // safely do something with aliceAsEmployee
+}
+
+
+try
+{
+    john.TimeTravel(when: new(1999, 12, 31));
+    john.TimeTravel(when: new(1950, 12, 25));
+}
+catch (PersonException ex)
+{
+    WriteLine(ex.Message);
 }
